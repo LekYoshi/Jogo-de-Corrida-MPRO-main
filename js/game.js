@@ -1,9 +1,10 @@
 class Game {
   constructor() {
-
+  this.resetButton = createButton("reset")
   }
 
   start() {
+    this.resetButton.position(50,50)
     if (gameState == 0) {
       form = new Form();
       form.display();
@@ -49,6 +50,7 @@ class Game {
   }
 
   play() {
+    this.resetGame()
     form.hide()
     Player.getPlayerInfo()
     if (allPlayers != undefined) {
@@ -63,10 +65,55 @@ class Game {
         y = allPlayers[p].positionY
         cars[index - 1].x = x
         cars[index - 1].y = y
+        this.playerControls()
+        if (index == player.index) {
+          camera.position.x = width / 2
+          camera.position.y = cars[index - 1].y
+          fill("red")
+          stroke("red")
+          ellipse(x, y, 60, 100)
+        }
       }
+      if (player.distance>2450){
+        gameState =2
+        player.rank +=1
+        player.update()
+      }
+
       drawSprites()
 
     }
   }
+  playerControls() {
+    if (keyIsDown(UP_ARROW)) {
+      player.positionY -= 10
+      player.distance += 10
+      player.update()
 
+    }
+    if (keyIsDown(LEFT_ARROW)) {
+      player.positionX -= 5
+      player.update()
+    }
+    if (keyIsDown(RIGHT_ARROW)) {
+      player.positionX += 5
+      player.update()
+    }
+  }
+ resetGame(){
+  this.resetButton.mousePressed(()=>{
+    database.ref("/")
+    .set({
+    gameState:0,
+    playerCount:0,
+    players:{}
+    
+    })
+   window.location.reload()
+    
+  })
+
+ }
+
+ 
 }

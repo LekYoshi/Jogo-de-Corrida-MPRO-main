@@ -6,6 +6,7 @@ class Player {
     this.positionY = 400
     this.rank = 0
     this.distance = 0
+    this.rotation = 0
 
   }
   getCount() {
@@ -53,5 +54,16 @@ class Player {
       .ref("players")
       .on("value", data => allPlayers = data.val())
 
+  }
+  update(){
+    var playerIndex = "players/player" + this.index
+    database
+    .ref(playerIndex)
+    .update({
+      positionX: this.positionX,
+      positionY: this.positionY,
+      rank: this.rank,
+      distance: this.distance
+    })
   }
 }
