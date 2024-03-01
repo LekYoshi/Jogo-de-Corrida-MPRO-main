@@ -28,16 +28,16 @@ class Player {
   addPlayer() {
     var playerIndex = "players/player" + this.index
     if (this.index == 1) {
-      this.positionX = 100
+      this.positionX = 200
     }
     else if (this.index == 2) {
-      this.positionX = 250
+      this.positionX = 370
     }
     else if (this.index == 3) {
-      this.positionX = 400
+      this.positionX = 560
     }
     else if (this.index == 4) {
-      this.positionX = 550
+      this.positionX = 750
     }
     database
       .ref(playerIndex)
@@ -46,7 +46,8 @@ class Player {
         positionX: this.positionX,
         positionY: this.positionY,
         rank: this.rank,
-        distance: this.distance
+        distance: this.distance,
+        rotation: this.rotation
       })
   }
   static getPlayerInfo() {
@@ -63,7 +64,22 @@ class Player {
       positionX: this.positionX,
       positionY: this.positionY,
       rank: this.rank,
-      distance: this.distance
+      distance: this.distance,
+      rotation: this.rotation
     })
   }
+  getCarsAtEnd(){
+    database
+    .ref("carsAtEnd")
+    .on("value", data => this.rank = data.val())
+  }
+
+  updateCarsAtEnd(rank){
+    database
+    .ref("/")
+    .update({
+      carsAtEnd:rank
+    })
+  }
+  
 }

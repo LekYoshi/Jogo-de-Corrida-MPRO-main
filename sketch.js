@@ -7,9 +7,13 @@ var cars=[]
 var carImg1,carImg2,carImg3,carImg4
 var track
 var allPlayers
+var endBg
+var carsAtEnd
+
 
 function preload() {
   bgimg = loadImage("./assets/images/background1.png");
+  endBg = loadImage("./assets/images/leaderboard1.png")
   carImg1=loadImage("./assets/images/car1.png")
   carImg2=loadImage("./assets/images/car2.png")
   carImg3=loadImage("./assets/images/car3.png")
@@ -36,6 +40,14 @@ function draw() {
   if (gameState ==1){
     clear()
     game.play()
+  }
+  if (gameState ==2){
+    clear()
+    background(endBg)
+    game.end()
+  }
+  if (player.rank == 4){
+    form.restart()
   }
 }
 

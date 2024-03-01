@@ -53,9 +53,10 @@ class Game {
     this.resetGame()
     form.hide()
     Player.getPlayerInfo()
+     player.getCarsAtEnd()
     if (allPlayers != undefined) {
       background("#263238")
-      image(track, 0, -height * 4, width, height * 5)
+      image(track, 0, -height * 7, width, height * 9)
 
       var index = 0
       var x, y
@@ -66,6 +67,14 @@ class Game {
         cars[index - 1].x = x
         cars[index - 1].y = y
         this.playerControls()
+        if (keyIsDown (UP_ARROW)){
+          cars [index -1].rotation = allPlayers[p].rotation
+        } if (keyIsDown (LEFT_ARROW)){
+          cars [index -1].rotation = allPlayers[p].rotation
+        }
+        if (keyIsDown (RIGHT_ARROW)){
+          cars [index -1].rotation = allPlayers[p].rotation
+        }
         if (index == player.index) {
           camera.position.x = width / 2
           camera.position.y = cars[index - 1].y
@@ -74,9 +83,10 @@ class Game {
           ellipse(x, y, 60, 100)
         }
       }
-      if (player.distance>2450){
+      if (player.distance>3700){
         gameState =2
         player.rank +=1
+        player.updateCarsAtEnd(player.rank)
         player.update()
       }
 
@@ -88,15 +98,18 @@ class Game {
     if (keyIsDown(UP_ARROW)) {
       player.positionY -= 10
       player.distance += 10
+      player.rotation = 0
       player.update()
 
     }
     if (keyIsDown(LEFT_ARROW)) {
       player.positionX -= 5
+      player.rotation = -25
       player.update()
     }
     if (keyIsDown(RIGHT_ARROW)) {
       player.positionX += 5
+      player.rotation= 25
       player.update()
     }
   }
@@ -106,14 +119,16 @@ class Game {
     .set({
     gameState:0,
     playerCount:0,
-    players:{}
-    
+    players:{},
+    carsAtEnd:0 
     })
    window.location.reload()
     
   })
 
  }
-
+ end(){
+  form.end()
+ }
  
 }

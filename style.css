@@ -32,3 +32,19 @@ html, body {
   font-family: vollkorn;
   text-align: center;
 }
+.customButton{
+  height: 50px;
+  width:180px;
+  border-radius: 15px;
+  background-color:#fea834;
+  border: 3px solid orangered ;
+  color: brown;
+  font-size: 30px;
+  font-weight: bold;
+  font-family:'Lucida Sans Regular';
+  text-align: center;
+  text-shadow:-1px 1px 0 red ,
+  1px 1px 0 red, 1px -1px 0 red, -1px -1px 0 red;
+  box-shadow:-1px 1px 0 red ,
+  2px 2px 0 red, 2px -2px 0 red, -2px -2px 0 red;
+}
